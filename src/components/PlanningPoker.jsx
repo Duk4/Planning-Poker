@@ -1,10 +1,29 @@
 import React from 'react';
+import AddTask from './AddTask';
+import Voting from './Voting';
 
 class PlanningPoker extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isAdding: true,
+            isVoting: false
+        }
+    }
+
     render() {
-        return (
-            <div>Hello world!</div>
-        );
+        const { isAdding, isVoting } = this.state;
+
+        if (isAdding === true) {
+            return (
+                <AddTask />
+            );
+        } else if (isVoting === true) {
+            return (
+                <Voting />
+            );
+        }
     }
 }
 
