@@ -1,0 +1,41 @@
+h1 {
+  font-size: 6rem;
+  padding: 2rem;
+}
+
+form {
+  width: 70%;
+  margin: 0 auto;
+}
+
+input {
+  font-size: 2rem;
+  margin: 0 5%;
+  width: 70%;
+  padding: 0.6rem;
+  text-align: left;
+  border-radius: 1rem;
+  outline: none;
+}
+
+.add-btn {
+  background-color: #008efb;
+  color: #fff;
+  font-size: 2rem;
+  margin: 0 5% 0 0;
+  width: 10%;
+  padding: 1rem;
+  border: none;
+  border-radius: 1rem;
+}
+
+.submit-btn {
+  background-color: #05cb61;
+  color: #fff;
+  font-size: 2rem;
+  padding: 1rem;
+  margin: 3rem 0;
+  border: none;
+  border-radius: 1rem;
+}
+/*# sourceMappingURL=addtask.css.map */
