@@ -1,11 +1,15 @@
 import React from 'react';
 
 class AddTask extends React.Component {
-    render() {
+    constructor(props) {
+        super(props);
         this.state = {
-
+            task: '',
+            tasks: []
         }
+    }
 
+    render() {
         return (
             <div className="add-task">
                 <h1>Add Task</h1>
@@ -14,7 +18,11 @@ class AddTask extends React.Component {
                         <input type="text" id="text" onChange="{}" />
                         <button className="add-btn" onClick="{}">Add</button>
                     </div>
-                    <div className="added-tasks"></div>
+                    <div className="added-tasks">
+                        {
+
+                        }
+                    </div>
                     <button className="submit-btn">Submit</button>
                 </form>
             </div>
