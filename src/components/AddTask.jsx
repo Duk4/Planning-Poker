@@ -10,6 +10,7 @@ class AddTask extends React.Component {
     }
 
     render() {
+        const { tasks } = this.state;
         return (
             <div className="add-task">
                 <h1>Add Task</h1>
@@ -20,7 +21,9 @@ class AddTask extends React.Component {
                     </div>
                     <div className="added-tasks">
                         {
-
+                            tasks.map((task, index) => {
+                                <Task key={index} task={task} />
+                            })
                         }
                     </div>
                     <button className="submit-btn">Submit</button>
