@@ -10,4 +10,4 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (user_id, first_name, last_name, email, pw, joined_on, last_entry) 
-VALUES (uuid_generate_v4(), "Dušan", "Tanasić", "crashendodt@gmail.com", "password123", NOW(), NOW());
+VALUES (uuid_generate_v4(), 'Dušan', 'Tanasić', 'crashendodt@gmail.com', 'password123', NOW(), NOW());
