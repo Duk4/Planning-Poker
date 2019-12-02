@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const User = require('./User');
 
 const app = express();
 
@@ -7,8 +8,10 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send({ message: 'endpoint working' });
 });
+
+app.get('/users', User.readAll);
 
 const port = process.env.PORT || 5000;
 
