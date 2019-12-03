@@ -1,14 +1,16 @@
+const Sequelize = require('sequelize');
 const database = require('./database');
 
-const User = {
-    async readAll(req, res) {
-        try {
-            const readAllQuery = 'SELECT * FROM users';
-            const { rows } = await database.query(readAllQuery);
-            return res.send({ rows });
-        } catch (error) {
-            return res.send(error);
-        }
+const User = database.define(
+    'users'
+);
+
+User.readAll = async (req, res) => {
+    try {
+        const users = await User.findAll();
+        return res.send({ users });
+    } catch (error) {
+        return res.send(error);
     }
 };
 

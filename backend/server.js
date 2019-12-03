@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.send({ message: 'endpoint working' });
+    res.send('Hello World!');
 });
 
 app.get('/users', User.readAll);
