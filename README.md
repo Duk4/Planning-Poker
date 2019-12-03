@@ -20,3 +20,4 @@ By giving points to every tasks, the team determines the difficulty of it, thus 
 
 ## Database
 * PostgreSQL
+* Sequelize ORM
