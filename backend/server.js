@@ -1,8 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const User = require('./User');
+const db = require('./database');
 
 const app = express();
+
+// Checking the db connection
+db.authenticate()
+    .then(() => { console.log('Works...') })
+    .catch(err => console.log('Error' + err));
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -11,7 +16,8 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-app.get('/users', User.readAll);
+// Users routes
+app.use('/users', require('./routes/users'));
 
 const port = process.env.PORT || 5000;
 
