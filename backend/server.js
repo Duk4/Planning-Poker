@@ -18,6 +18,9 @@ app.get('/', (req, res) => {
 
 // Users routes
 app.use('/users', require('./routes/users'));
+app.use('/sessions', require('./routes/sessions'));
+app.use('/tasks', require('./routes/tasks'));
+app.use('/participants', require('./routes/participants'));
 
 const port = process.env.PORT || 5000;
 
