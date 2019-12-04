@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-// Users routes
+// Routes
 app.use('/users', require('./routes/users'));
 app.use('/sessions', require('./routes/sessions'));
 app.use('/tasks', require('./routes/tasks'));
