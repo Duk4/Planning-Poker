@@ -11,16 +11,21 @@ db.authenticate()
 
 // Body parser middleware
 app.use(bodyParser.json());
+app.use(
+    bodyParser.urlencoded({
+        extended: true,
+    })
+);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
 // Routes
-app.use('/users', require('./routes/users'));
-app.use('/sessions', require('./routes/sessions'));
-app.use('/tasks', require('./routes/tasks'));
-app.use('/participants', require('./routes/participants'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/sessions', require('./routes/sessions'));
+app.use('/api/tasks', require('./routes/tasks'));
+app.use('/api/participants', require('./routes/participants'));
 
 const port = process.env.PORT || 5000;
 
