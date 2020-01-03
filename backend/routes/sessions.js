@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) =>
     Session.findAll()
-        .then(sessions => console.log(sessions))
+        .then(sessions => res.send(sessions))
         .catch(err => console.log('Error: ', err))
 );
 

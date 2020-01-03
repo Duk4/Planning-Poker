@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) =>
     Task.findAll()
-        .then(tasks => console.log(tasks))
+        .then(tasks => res.send(tasks))
         .catch(err => console.log('Error: ', err))
 );
 

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) =>
     Participant.findAll()
-        .then(participants => console.log(participants))
+        .then(participants => res.send(participants))
         .catch(err => console.log('Error: ', err))
 );
 
