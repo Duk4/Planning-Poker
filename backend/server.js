@@ -13,18 +13,19 @@ db.authenticate()
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({
-        extended: true,
+        extended: true
     })
 );
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
 // Routes
+app.get('/', (req, res) => { res.send('Hello World!') });
+
 app.use('/api/users', require('./routes/users'));
+app.use('/api/users', require('./routes/userById'));
 app.use('/api/sessions', require('./routes/sessions'));
+app.use('/api/sessions', require('./routes/sessionById'));
 app.use('/api/tasks', require('./routes/tasks'));
+app.use('/api/tasks', require('./routes/taskById'));
 app.use('/api/participants', require('./routes/participants'));
 
 const port = process.env.PORT || 5000;
