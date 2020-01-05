@@ -1,5 +1,5 @@
 const express = require('express');
-const Session = require('../models/Session');
+const Session = require('../../models/Session');
 const router = express.Router();
 
 router.get('/', (req, res) =>

@@ -19,14 +19,18 @@ app.use(
 
 // Routes
 app.get('/', (req, res) => { res.send('Hello World!') });
-
-app.use('/api/users', require('./routes/users'));
-app.use('/api/users', require('./routes/userById'));
-app.use('/api/sessions', require('./routes/sessions'));
-app.use('/api/sessions', require('./routes/sessionById'));
-app.use('/api/tasks', require('./routes/tasks'));
-app.use('/api/tasks', require('./routes/taskById'));
-app.use('/api/participants', require('./routes/participants'));
+app.use('/api/users', require('./requests/get/users'));
+app.use('/api/users', require('./requests/get/userById'));
+app.use('/api/users', require('./requests/post/postUser'));
+app.use('/api/sessions', require('./requests/get/sessions'));
+app.use('/api/sessions', require('./requests/get/sessionById'));
+app.use('/api/sessions', require('./requests/post/postSession'));
+app.use('/api/tasks', require('./requests/get/tasks'));
+app.use('/api/tasks', require('./requests/get/taskById'));
+app.use('/api/tasks', require('./requests/post/postTask'));
+app.use('/api/participants', require('./requests/get/participants'));
+app.use('/api/participants', require('./requests/get/participantsBySessionId'));
+app.use('/api/participants', require('./requests/post/postParticipant'));
 
 const port = process.env.PORT || 5000;
 

@@ -1,10 +1,10 @@
 const express = require('express');
-const User = require('../models/User');
+const Participant = require('../../models/Participant');
 const router = express.Router();
 
 router.get('/', (req, res) =>
-    User.findAll()
-        .then(users => res.json(users))
+    Participant.findAll()
+        .then(participants => res.send(participants))
         .catch(err => console.log('Error: ', err))
 );
 
