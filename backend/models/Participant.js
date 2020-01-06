@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../database');
-const User = require('../models/User');
-const Session = require('../models/Session');
+const User = require('./User');
+const Session = require('./Session');
 
 const Participant = db.define('participants', {
     participant: {

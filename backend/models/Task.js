@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../database');
-const Session = require('../models/Session');
+const Session = require('./Session');
 
 const Task = db.define('tasks', {
     task_id: { type: Sequelize.UUIDV4, allowNull: false, primaryKey: true },
