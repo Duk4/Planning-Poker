@@ -13,7 +13,4 @@ const Session = db.define('sessions', {
     }
 }, { timestamps: false });
 
-Session.hasMany(Task, { foreignKey: 'session_id' });
-Session.hasMany(Participant, { foreignKey: 'session_id' });
-
 module.exports = Session;

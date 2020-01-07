@@ -9,7 +9,8 @@ router.post('/', (req, res) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
-        pw: req.body.pw
+        pw: req.body.pw,
+        status_is: 'active'
     })
         .then((user) => res.json(user))
         .catch(err => res.send(err))

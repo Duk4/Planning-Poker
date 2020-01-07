@@ -21,6 +21,8 @@ app.use(
 app.get('/', (req, res) => { res.send('Hello World!') });
 
 app.use('/api/users', require('./requests/get/users'));
+app.use('/api/users', require('./requests/get/activeUsers'));
+app.use('/api/users', require('./requests/get/deletedUsers'));
 app.use('/api/users', require('./requests/get/userById'));
 app.use('/api/users', require('./requests/post/postUser'));
 app.use('/api/users', require('./requests/delete/deleteUser'));
@@ -29,11 +31,13 @@ app.use('/api/sessions', require('./requests/get/sessions'));
 app.use('/api/sessions', require('./requests/get/sessionById'));
 app.use('/api/sessions/admin', require('./requests/get/sessionsByAdminId'));
 app.use('/api/sessions', require('./requests/post/postSession'));
+app.use('/api/sessions', require('./requests/delete/deleteSession'));
 
 app.use('/api/tasks', require('./requests/get/tasks'));
 app.use('/api/tasks', require('./requests/get/taskById'));
 app.use('/api/tasks/session', require('./requests/get/tasksBySessionId'));
 app.use('/api/tasks', require('./requests/post/postTask'));
+app.use('/api/tasks', require('./requests/delete/deleteTask'));
 
 app.use('/api/participants', require('./requests/get/participants'));
 app.use('/api/participants', require('./requests/get/participantsBySessionId'));

@@ -5,9 +5,10 @@ const router = express.Router();
 router.delete('/:user_id', (req, res) => {
     let { user_id } = req.params;
 
-    User.destroy({ where: { user_id } })
-        .then(() => res.status(204).send())
-        .catch(err => res.send(err))
+    User.findByPk(user_id)
+        .then(task => task.update({ status_is: 'deleted' }))
+        .then(user => res.json(user))
+        .catch(err => res.send(err));
 });
 
 module.exports = router;
