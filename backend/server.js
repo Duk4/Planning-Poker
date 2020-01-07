@@ -44,6 +44,7 @@ app.use('/api/participants', require('./requests/get/participantsBySessionId'));
 app.use('/api/participants', require('./requests/post/postParticipant'));
 app.use('/api/participants', require('./requests/delete/deleteParticipant'));
 
+// PORT
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

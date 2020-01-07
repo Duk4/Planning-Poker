@@ -4,6 +4,7 @@ CREATE TABLE users (
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     pw VARCHAR(100) NOT NULL,
+    status_is VARCHAR(10) SET DEFAULT 'active',
     joined_on DATE NOT NULL,
     last_entry DATE NOT NULL,
     UNIQUE(email)

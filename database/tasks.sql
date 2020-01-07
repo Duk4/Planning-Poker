@@ -2,5 +2,5 @@ CREATE TABLE tasks (
     task_id UUID NOT NULL PRIMARY KEY,
     task_name VARCHAR(255) NOT NULL,
     task_value VARCHAR(3) NOT NULL,
-    session_id UUID NOT NULL REFERENCES sessions(session_id)
+    session_id UUID NOT NULL REFERENCES sessions(session_id) ON DELETE CASCADE
 );
