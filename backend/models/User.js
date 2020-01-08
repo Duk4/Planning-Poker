@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('../database');
-const Session = require('./Session');
-const Participant = require('./Participant');
 
 const User = db.define('users', {
     user_id: { type: Sequelize.UUIDV4, allowNull: false, primaryKey: true },

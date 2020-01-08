@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../database');
 const User = require('./User');
-const Task = require('./Task');
-const Participant = require('./Participant');
 
 const Session = db.define('sessions', {
     session_id: { type: Sequelize.UUIDV4, allowNull: false, primaryKey: true },

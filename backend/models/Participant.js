@@ -5,7 +5,7 @@ const Session = require('./Session');
 
 const Participant = db.define('participants', {
     participant: {
-        type: Sequelize.UUID, allowNull: false, primaryKey: true,
+        type: Sequelize.UUID, allowNull: false,
         references: { model: User, key: 'user_id', deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE }
     },
     session_id: {
@@ -13,5 +13,7 @@ const Participant = db.define('participants', {
         references: { model: Session, key: 'session_id', deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE }
     }
 }, { timestamps: false });
+
+Participant.removeAttribute('id');
 
 module.exports = Participant;
