@@ -6,8 +6,8 @@ const app = express();
 
 // Checking the db connection
 db.authenticate()
-    .then(() => { console.log('Works...') })
-    .catch(err => console.log('Error' + err));
+    .then(() => { console.log('Database loaded...') })
+    .catch(err => console.log('Error: ' + err));
 
 // Body parser middleware
 app.use(bodyParser.json());
