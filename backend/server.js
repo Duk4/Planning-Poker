@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const db = require('./database');
 
 const app = express();
@@ -9,13 +8,8 @@ db.authenticate()
     .then(() => { console.log('Database loaded...') })
     .catch(err => console.log('Error: ' + err));
 
-// Body parser middleware
-app.use(bodyParser.json());
-app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
-);
+// Middleware
+app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => { res.send('Hello World!') });
