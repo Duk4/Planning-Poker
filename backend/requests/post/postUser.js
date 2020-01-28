@@ -1,9 +1,7 @@
-const express = require('express');
 const User = require('../../models/User');
 const uuidv4 = require('uuid/v4');
-const router = express.Router();
 
-router.post('/', (req, res) => {
+module.exports = (req, res) => {
     User.create({
         user_id: uuidv4(),
         first_name: req.body.first_name,
@@ -14,6 +12,4 @@ router.post('/', (req, res) => {
     })
         .then((user) => res.json(user))
         .catch(err => res.send(err))
-});
-
-module.exports = router;
+};

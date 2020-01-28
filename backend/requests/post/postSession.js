@@ -1,9 +1,7 @@
-const express = require('express');
 const Session = require('../../models/Session');
 const uuidv4 = require('uuid/v4');
-const router = express.Router();
 
-router.post('/', (req, res) => {
+module.exports = (req, res) => {
     Session.create({
         session_id: uuidv4(),
         session_name: req.body.session_name,
@@ -11,6 +9,4 @@ router.post('/', (req, res) => {
     })
         .then((session) => res.json(session))
         .catch(err => res.send(err))
-});
-
-module.exports = router;
+};

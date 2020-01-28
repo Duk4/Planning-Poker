@@ -1,9 +1,7 @@
-const express = require('express');
 const Task = require('../../models/Task');
 const uuidv4 = require('uuid/v4');
-const router = express.Router();
 
-router.post('/', (req, res) => {
+module.exports = (req, res) => {
     Task.create({
         task_id: uuidv4(),
         task_name: req.body.task_name,
@@ -12,6 +10,4 @@ router.post('/', (req, res) => {
     })
         .then((session) => res.json(session))
         .catch(err => res.send(err))
-});
-
-module.exports = router;
+};
