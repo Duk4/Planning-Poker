@@ -2,7 +2,7 @@ const express = require('express');
 const Task = require('../../models/Task');
 const router = express.Router();
 
-router.put('/:task_id', (req, res) => {
+router.patch('/:task_id', (req, res) => {
     let { task_id } = req.params;
 
     Task.findByPk(task_id)
