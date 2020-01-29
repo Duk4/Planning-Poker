@@ -1,10 +1,10 @@
 const express = require('express');
-
-const participants = require('../requests/get/participants');
-const createParticipant = require('../requests/post/postParticipant');
-
-const participantsBySession = require('../requests/get/participantsBySessionId');
-const deleteParticipant = require('../requests/delete/deleteParticipant');
+const {
+    participants,
+    createParticipant,
+    participantsBySession,
+    deleteParticipant
+} = require('../controllers/participantController');
 
 const router = express.Router();
 

@@ -1,13 +1,12 @@
 const express = require('express');
-
-const tasks = require('../requests/get/tasks');
-const createTask = require('../requests/post/postTask');
-
-const task = require('../requests/get/taskById');
-const updateTask = require('../requests/patch/updateTask');
-const deleteTask = require('../requests/delete/deleteTask');
-
-const tasksBySession = require('../requests/get/tasksBySessionId');
+const {
+    tasks,
+    createTask,
+    task,
+    updateTask,
+    deleteTask,
+    tasksBySession
+} = require('../controllers/taskController');
 
 const router = express.Router();
 

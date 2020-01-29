@@ -1,13 +1,12 @@
 const express = require('express');
-
-const sessions = require('../requests/get/sessions');
-const createSession = require('../requests/post/postSession');
-
-const session = require('../requests/get/sessionById');
-const updateSession = require('../requests/patch/updateSessionName');
-const deleteSession = require('../requests/delete/deleteSession');
-
-const sessionAdmin = require('../requests/get/sessionsByAdminId');
+const {
+    sessions,
+    createSession,
+    session,
+    updateSession,
+    deleteSession,
+    sessionAdmin
+} = require('../controllers/sessionController');
 
 const router = express.Router();
 
