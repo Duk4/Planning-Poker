@@ -46,7 +46,7 @@ function parseUserRequestBody(body) {
     if (pw) return { pw };
     if (first_name && last_name) return { first_name, last_name };
 
-    throw new Error('Invalid Request');
+    throw new AppError('Invalid input!', 400);
 };
 
 exports.updateUser = catchAsync(async (req, res, next) => {

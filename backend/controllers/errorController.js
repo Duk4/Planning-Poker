@@ -1,8 +1,18 @@
 const AppError = require('../utils/appError');
 
 const handleSequelizeValidationError = (err) => {
-    const message = `Invalid ${err.path}: ${err.value}.`
+    const message = `Invalid ${err.errors.path}: ${err.errors.value}.`;
     return new AppError(message, 400);
+};
+
+const handleSequelizeUniqueConstraintError = (err) => {
+    const message = `This ${err.errors.path}: ${err.errors.value}, already exists.`;
+    return new AppError(message, 400);
+};
+
+const handleSequelizeConnectionError = (err) => {
+    const message = "Fatal error";
+    return new AppError(message, 500);
 };
 
 const sendErrorDev = (err, res) => {
@@ -40,6 +50,8 @@ module.exports = (err, req, res, next) => {
         let error = { ...err };
 
         if (error.name === "SequelizeValidationError") error = handleSequelizeValidationError(error);
+        if (error.name === "SequelizeUniqueConstraintError") error = handleSequelizeUniqueConstraintError(error);
+        if (error.name === "SequelizeConnectionError") error = handleSequelizeConnectionError(error);
 
         sendErrorProd(error, res);
     };
