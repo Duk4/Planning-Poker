@@ -3,8 +3,7 @@ const {
     participants,
     createParticipant,
     deleteParticipant,
-    participantsBySession,
-    deleteParticipants
+    participantsBySession
 } = require('../controllers/participantController');
 
 const router = express.Router();
@@ -16,11 +15,7 @@ router
 
 router
     .route('/:id')
-    .delete(deleteParticipant);
-
-router
-    .route('/session/:id')
     .get(participantsBySession)
-    .delete(deleteParticipants);
+    .delete(deleteParticipant);
 
 module.exports = router;

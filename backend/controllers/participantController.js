@@ -35,18 +35,6 @@ exports.deleteParticipant = catchAsync(async (req, res, next) => {
         return next(new AppError('Participant with that ID does not exist!', 404));
     }
 
-    await Participant.destroy(participant);
-    res.status(202).send("Participant deleted...");
-});
-
-exports.deleteParticipants = catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const participants = Participant.findAll({ where: { session_id: id } });
-
-    if (!participants) {
-        return next(new AppError('Participants with that session ID do not exist!', 404));
-    }
-
-    await Participant.destroy(participants);
+    await Participant.destroy({ where: { participant: id } });
     res.status(202).send("Participant deleted...");
 });

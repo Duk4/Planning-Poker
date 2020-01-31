@@ -74,6 +74,6 @@ exports.deleteTask = catchAsync(async (req, res, next) => {
         return next(new AppError('Task with that ID does not exist!', 404));
     }
 
-    await Task.destroy(task);
+    await Task.destroy({ where: { task_id: id } });
     res.status(204).send("Task deleted...");
 });

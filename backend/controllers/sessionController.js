@@ -60,6 +60,6 @@ exports.deleteSession = catchAsync(async (req, res, next) => {
         return next(new AppError('Session with that ID does not exist!', 404));
     }
 
-    await Session.destroy(session);
+    await Session.destroy({ where: { session_id: id } });
     res.status(202).send("Session deleted...");
 });
