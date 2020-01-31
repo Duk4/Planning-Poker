@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const uuidv4 = require('uuid/v4');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 exports.users = catchAsync(async (req, res, next) => {
     const users = await User.findAll();
@@ -10,6 +11,11 @@ exports.users = catchAsync(async (req, res, next) => {
 exports.user = catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const user = await User.findByPk(id);
+
+    if (!user) {
+        return next(new AppError('User with that ID does not exist!', 404));
+    }
+
     res.json(user);
 });
 
@@ -47,6 +53,11 @@ exports.updateUser = catchAsync(async (req, res, next) => {
     const updateObj = parseUserRequestBody(req.body);
     const { id } = req.params;
     const user = await User.findByPk(id);
+
+    if (!user) {
+        return next(new AppError('User with that ID does not exist!', 404));
+    }
+
     await user.update(updateObj);
     res.status(202).json(user);
 });
@@ -54,6 +65,11 @@ exports.updateUser = catchAsync(async (req, res, next) => {
 exports.deleteUser = catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const user = await User.findByPk(id);
+
+    if (!user) {
+        return next(new AppError('User with that ID does not exist!', 404));
+    }
+
     await user.update({ status_is: "deleted" });
     res.status(202).send("User status: deleted");
 });

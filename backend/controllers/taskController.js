@@ -1,6 +1,7 @@
 const Task = require('../models/Task');
 const uuidv4 = require('uuid/v4');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 exports.tasks = catchAsync(async (req, res, next) => {
     const tasks = await Task.findAll();
@@ -10,12 +11,22 @@ exports.tasks = catchAsync(async (req, res, next) => {
 exports.task = catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const task = await Task.findByPk(id);
+
+    if (!task) {
+        return next(new AppError('Task with that ID does not exist!', 404));
+    }
+
     res.json(task);
 });
 
 exports.tasksBySession = catchAsync(async (req, res, next) => {
     const { session_id } = req.params;
     const tasks = await Task.findAll({ where: { session_id } });
+
+    if (!tasks) {
+        return next(new AppError('Tasks with that session ID do not exist!', 404));
+    }
+
     res.json(tasks);
 });
 
@@ -46,12 +57,23 @@ exports.updateTask = catchAsync(async (req, res, next) => {
     const updateObj = parseUserRequestBody(req.body);
     const { id } = req.params;
     const task = await Task.findByPk(id);
+
+    if (!task) {
+        return next(new AppError('Task with that ID does not exist!', 404));
+    }
+
     await task.update(updateObj);
     res.status(202).json(task);
 });
 
 exports.deleteTask = catchAsync(async (req, res, next) => {
     const { id } = req.params;
-    await Task.destroy({ where: { task_id: id } });
+    const task = Task.findAll({ where: { task_id: id } });
+
+    if (!task) {
+        return next(new AppError('Task with that ID does not exist!', 404));
+    }
+
+    await Task.destroy(task);
     res.status(204).send("Task deleted...");
 });
