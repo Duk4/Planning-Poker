@@ -11,5 +11,5 @@
 * Write following in the terminal:
 ```bash
 cd backend/
-npm run server
+npm start
 ```
