@@ -1,59 +1,28 @@
 const Participant = require('../models/Participant');
+const catchAsync = require('../utils/catchAsync');
 
-exports.participants = async (req, res) => {
-    try {
-        const participants = await Participant.findAll();
-        res.json(participants);
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            message: "Request failed...",
-            error
-        })
-    }
-};
+exports.participants = catchAsync(async (req, res, next) => {
+    const participants = await Participant.findAll();
+    res.json(participants);
+});
 
-exports.participantsBySession = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const participant = await Participant.findAll({ where: { session_id: id } });
-        res.json(participant);
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            message: "Request failed...",
-            error
-        })
-    }
-};
+exports.participantsBySession = catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const participant = await Participant.findAll({ where: { session_id: id } });
+    res.json(participant);
+});
 
-exports.createParticipant = async (req, res) => {
-    try {
-        const participant = {
-            participant: req.body.participant,
-            session_id: req.body.session_id
-        };
-        await Participant.create(participant);
-        res.status(201).json(participant);
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            message: "Request failed...",
-            error
-        });
-    }
-};
+exports.createParticipant = catchAsync(async (req, res, next) => {
+    const participant = {
+        participant: req.body.participant,
+        session_id: req.body.session_id
+    };
+    await Participant.create(participant);
+    res.status(201).json(participant);
+});
 
-exports.deleteParticipant = async (req, res) => {
-    try {
-        const { id } = req.params;
-        await Participant.destroy({ where: { participant: id } });
-        res.status(202).send("Participant deleted...");
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            message: "Request failed...",
-            error
-        });
-    }
-};
+exports.deleteParticipant = catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    await Participant.destroy({ where: { participant: id } });
+    res.status(202).send("Participant deleted...");
+});

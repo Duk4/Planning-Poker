@@ -1,4 +1,6 @@
 const express = require('express');
+const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
 const sessionRouter = require('./routes/sessionRoutes');
 const taskRouter = require('./routes/taskRoutes');
@@ -16,5 +18,13 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/sessions', sessionRouter);
 app.use('/api/v1/tasks', taskRouter);
 app.use('/api/v1/participants', participantRouter);
+
+// Middleware handling unhandled routes
+app.all('*', (req, res, next) => {
+    next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
+});
+
+// Global error handling middleware
+app.use(globalErrorHandler);
 
 module.exports = app;
