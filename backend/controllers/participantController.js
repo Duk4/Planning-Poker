@@ -19,10 +19,7 @@ exports.participantsBySession = catchAsync(async (req, res, next) => {
 });
 
 exports.createParticipant = catchAsync(async (req, res, next) => {
-    const participant = {
-        participant: req.body.participant,
-        session_id: req.body.session_id
-    };
+    const participant = req.body;
     await Participant.create(participant);
     res.status(201).json(participant);
 });
