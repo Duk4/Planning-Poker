@@ -4,7 +4,6 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 exports.sessions = catchAsync(async (req, res, next) => {
-    console.log(req.query);
     const sessions = await Session.findAll({ where: req.query });
     res.json(sessions);
 });
