@@ -4,7 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 exports.tasks = catchAsync(async (req, res, next) => {
-    const tasks = await Task.findAll();
+    const tasks = await Task.findAll({ where: req.query });
     res.json(tasks);
 });
 
@@ -17,17 +17,6 @@ exports.task = catchAsync(async (req, res, next) => {
     }
 
     res.json(task);
-});
-
-exports.tasksBySession = catchAsync(async (req, res, next) => {
-    const { session_id } = req.params;
-    const tasks = await Task.findAll({ where: { session_id } });
-
-    if (!tasks) {
-        return next(new AppError('Tasks with that session ID do not exist!', 404));
-    }
-
-    res.json(tasks);
 });
 
 exports.createTask = catchAsync(async (req, res, next) => {

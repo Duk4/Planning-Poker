@@ -4,8 +4,7 @@ const {
     createSession,
     session,
     updateSession,
-    deleteSession,
-    sessionAdmin
+    deleteSession
 } = require('../controllers/sessionController');
 
 const router = express.Router();
@@ -20,9 +19,5 @@ router
     .get(session)
     .patch(updateSession)
     .delete(deleteSession);
-
-router
-    .route('/admin/:session_admin')
-    .get(sessionAdmin);
 
 module.exports = router;

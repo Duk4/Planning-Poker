@@ -4,8 +4,7 @@ const {
     createTask,
     task,
     updateTask,
-    deleteTask,
-    tasksBySession
+    deleteTask
 } = require('../controllers/taskController');
 
 const router = express.Router();
@@ -20,9 +19,5 @@ router
     .get(task)
     .patch(updateTask)
     .delete(deleteTask);
-
-router
-    .route('/session/:session_id')
-    .get(tasksBySession);
 
 module.exports = router;

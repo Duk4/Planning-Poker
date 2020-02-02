@@ -4,7 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 exports.users = catchAsync(async (req, res, next) => {
-    const users = await User.findAll();
+    const users = await User.findAll({ where: req.query });
     res.json(users);
 });
 

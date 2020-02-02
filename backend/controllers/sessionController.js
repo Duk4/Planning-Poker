@@ -4,24 +4,14 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 exports.sessions = catchAsync(async (req, res, next) => {
-    const sessions = await Session.findAll();
+    console.log(req.query);
+    const sessions = await Session.findAll({ where: req.query });
     res.json(sessions);
 });
 
 exports.session = catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const session = await Session.findByPk(id);
-
-    if (!session) {
-        return next(new AppError('Session with that ID does not exist!', 404));
-    }
-
-    res.json(session);
-});
-
-exports.sessionAdmin = catchAsync(async (req, res, next) => {
-    const { session_admin } = req.params;
-    const session = await Session.findAll({ where: { session_admin } });
 
     if (!session) {
         return next(new AppError('Session with that ID does not exist!', 404));
