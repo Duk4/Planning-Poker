@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcryptjs');
 const db = require('../database');
 
 const User = db.define('users', {
@@ -10,6 +11,18 @@ const User = db.define('users', {
     status_is: { type: Sequelize.STRING, allowNull: false, validate: { len: [2, 10] } },
     joined_on: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.NOW },
     last_entry: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.NOW }
-}, { timestamps: false });
+}, {
+    timestamps: false,
+    hooks: {
+        beforeCreate: async (user) => {
+            user.pw = await bcrypt.hash(user.pw, 12);
+        }
+    },
+    instanceMethods: {
+        validPassword: async (pw) => {
+            return await bcrypt.compare(pw, this.pw);
+        }
+    }
+});
 
 module.exports = User;
