@@ -18,11 +18,18 @@ const User = db.define('users', {
             user.pw = await bcrypt.hash(user.pw, 12);
         }
     },
-    instanceMethods: {
-        validPassword: async (pw) => {
-            return await bcrypt.compare(pw, this.pw);
+    defaultScope: {
+        attributes: { exclude: ['pw'] }
+    },
+    scopes: {
+        withPassword: {
+            attributes: {}
         }
     }
 });
+
+User.prototype.validPassword = async function (candidatePW, userPW) {
+    return await bcrypt.compare(candidatePW, userPW);
+}
 
 module.exports = User;
