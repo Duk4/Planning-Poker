@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const uuidv4 = require('uuid/v4');
+const jwt = require('jsonwebtoken');
 const catchAsync = require('../utils/catchAsync');
 
 exports.signup = catchAsync(async (req, res, next) => {
@@ -12,6 +13,11 @@ exports.signup = catchAsync(async (req, res, next) => {
         status_is: 'active'
     };
     let newUser = await User.create(user);
+    const token = jwt.sign({ id: newUser.user_id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
     newUser.pw = undefined;
-    res.status(201).json(newUser);
+    res.status(201).json({
+        status: 'success',
+        token,
+        newUser
+    });
 });
