@@ -28,8 +28,9 @@ exports.createUser = catchAsync(async (req, res, next) => {
         pw: req.body.pw,
         status_is: 'active'
     };
-    await User.create(user);
-    res.status(201).json(user);
+    let newUser = await User.create(user);
+    newUser.pw = undefined;
+    res.status(201).json(newUser);
 });
 
 function parseUserRequestBody(body) {
