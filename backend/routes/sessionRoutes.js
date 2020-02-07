@@ -6,12 +6,13 @@ const {
     updateSession,
     deleteSession
 } = require('../controllers/sessionController');
+const { protect } = require('../controllers/authController');
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(sessions)
+    .get(protect, sessions)
     .post(createSession);
 
 router

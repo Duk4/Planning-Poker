@@ -10,7 +10,8 @@ const User = db.define('users', {
     pw: { type: Sequelize.STRING, allowNull: false, validate: { len: [2, 100] } },
     status_is: { type: Sequelize.STRING, allowNull: false, validate: { len: [2, 10] } },
     joined_on: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.NOW },
-    last_entry: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.NOW }
+    last_entry: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.NOW },
+    changed_pw_at: { type: Sequelize.DATE, defaultValue: null }
 }, {
     timestamps: false,
     hooks: {
@@ -30,6 +31,15 @@ const User = db.define('users', {
 
 User.prototype.validPassword = async function (candidatePW, userPW) {
     return await bcrypt.compare(candidatePW, userPW);
+}
+
+User.prototype.didPasswordChange = function (JWTTimestamp) {
+    if (this.changed_pw_at) {
+        const changedTimestamp = parseInt(this.changed_pw_at.getTime() / 1000, 10);
+        return JWTTimestamp < changedTimestamp;
+    }
+
+    return false;
 }
 
 module.exports = User;
