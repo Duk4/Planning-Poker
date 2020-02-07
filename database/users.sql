@@ -7,6 +7,7 @@ CREATE TABLE users (
     status_is VARCHAR(10) SET DEFAULT 'active',
     joined_on DATE NOT NULL,
     last_entry DATE NOT NULL,
+    changed_pw_at TIMESTAMP SET DEFAULT NULL,
     UNIQUE(email)
 );
 
