@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "api",
+  "description": "RESTful API",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -11,7 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "concurrently": "^5.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
