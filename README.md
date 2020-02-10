@@ -1,6 +1,8 @@
 ## Backend tools
 * Node.js
 * Express.js
+* Bcrypt.js
+* JSON Web Token
 
 ## Database
 * PostgreSQL
