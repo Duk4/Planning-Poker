@@ -6,19 +6,19 @@ const {
     updateSession,
     deleteSession
 } = require('../controllers/sessionController');
-const { protect } = require('../controllers/authController');
+const { protect, restrictTo } = require('../controllers/authController');
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(protect, sessions)
-    .post(createSession);
+    .get(protect, restrictTo('all'), sessions)
+    .post(protect, restrictTo('admin'), createSession);
 
 router
     .route('/:id')
-    .get(session)
-    .patch(updateSession)
-    .delete(deleteSession);
+    .get(protect, restrictTo('participant', 'admin'), session)
+    .patch(protect, restrictTo('admin'), updateSession)
+    .delete(protect, restrictTo('admin'), deleteSession);
 
 module.exports = router;

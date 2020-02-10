@@ -2,6 +2,8 @@ const { promisify } = require('util');
 const uuidv4 = require('uuid/v4');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Session = require('../models/Session');
+const Participant = require('../models/Participant');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -43,6 +45,7 @@ exports.login = async (req, res, next) => {
     };
 
     // 3) if all good, send token
+    await user.update({ last_entry: new Date() });
     const token = getToken(user.user_id);
     res.status(200).json({
         status: 'success',
@@ -78,3 +81,13 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.user = currentUser;
     next();
 });
+
+exports.restrictTo = (...roles) => {
+    return (req, res, next) => {
+        if (roles.includes('all')) {
+            return next(new AppError('You do not have permission to perform this action!', 403));
+        };
+
+        next();
+    };
+};

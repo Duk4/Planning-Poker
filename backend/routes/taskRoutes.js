@@ -6,18 +6,19 @@ const {
     updateTask,
     deleteTask
 } = require('../controllers/taskController');
+const { protect } = require('../controllers/authController');
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(tasks)
-    .post(createTask);
+    .get(protect, tasks)
+    .post(protect, createTask);
 
 router
     .route('/:id')
-    .get(task)
-    .patch(updateTask)
-    .delete(deleteTask);
+    .get(protect, task)
+    .patch(protect, updateTask)
+    .delete(protect, deleteTask);
 
 module.exports = router;

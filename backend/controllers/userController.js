@@ -63,7 +63,8 @@ exports.updateUser = catchAsync(async (req, res, next) => {
         return next(new AppError('User with that ID does not exist!', 404));
     }
 
-    const updatedUser = await user.update(updateObj);
+    let updatedUser = await user.update(updateObj);
+    updatedUser.pw = undefined;
     res.status(202).json(updatedUser);
 });
 

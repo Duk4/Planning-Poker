@@ -7,6 +7,7 @@ const {
     deleteUser
 } = require('../controllers/userController');
 const { signup, login } = require('../controllers/authController');
+const { protect } = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -20,8 +21,8 @@ router
 
 router
     .route('/:id')
-    .get(user)
-    .patch(updateUser)
-    .delete(deleteUser);
+    .get(protect, user)
+    .patch(protect, updateUser)
+    .delete(protect, deleteUser);
 
 module.exports = router;
