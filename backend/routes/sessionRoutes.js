@@ -17,7 +17,7 @@ router
 
 router
     .route('/:id')
-    .get(protect, restrictTo('participant', 'admin'), session)
+    .get(protect, restrictTo('participant'), session)
     .patch(protect, restrictTo('admin'), updateSession)
     .delete(protect, restrictTo('admin'), deleteSession);
 

@@ -82,9 +82,13 @@ exports.protect = catchAsync(async (req, res, next) => {
     next();
 });
 
-exports.restrictTo = (...roles) => {
+exports.restrictTo = (role) => {
     return (req, res, next) => {
-        if (roles.includes('all')) {
+        if (role.includes('all')) {
+            return next(new AppError('You do not have permission to perform this action!', 403));
+        } else if (roles.includes('admin')) {
+            return next(new AppError('You do not have permission to perform this action!', 403));
+        } else if (roles.includes('participant')) {
             return next(new AppError('You do not have permission to perform this action!', 403));
         };
 
